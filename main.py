@@ -1,9 +1,7 @@
+import random, time, speech_recognition as sr, socket, pyttsx3, pygame
 
-import random
-import time
-import socket
-import speech_recognition as sr
-import pyttsx3
+pygame.init()
+screen = pygame.display.set_mode((600, 700))
 
 engine = pyttsx3.init()
 
@@ -12,9 +10,9 @@ engine = pyttsx3.init()
 def record_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print('Say something!')
+
         audio = r.listen(source)
-        print('Done!')
+
     try:
         text = r.recognize_google(audio)
         print('You said: {}'.format(text))
@@ -23,6 +21,12 @@ def record_audio():
         print('Could not understand audio')
     except sr.RequestError as e:
         print('Could not request results; {0}'.format(e))
+
+def say(what):
+    engine.say(what)
+
+    engine.runAndWait()
+
 
 global z
 global choice
@@ -147,19 +151,11 @@ while True:
         else:
 
             if random.randint(1, 2) == 1:
-                # convert this text to speech
-                text = "Na Na Na Na"
-                engine.say(text)
-                # play the speech
-                engine.runAndWait()
+                say("Na Na Na Na")
 
 
             else:
-                # convert this text to speech
-                text = "Shut up"
-                engine.say(text)
-                # play the speech
-                engine.runAndWait()
+                say("Shut up")
 
     # phone
 
@@ -220,14 +216,9 @@ while True:
 
                 if answer == 1:
 
-                    chance = random.randint(1, 5)
 
-                    if chance == 1:
-                        # convert this text to speech
-                        text = "Gender: female, Race: White, Birthday: 1/8/1989 (33 years old), Street: 3344 Lakeland Park Drive City, State, Zip: Roswell, Georgia(GA), 30075 Telephone: 770-643-6809 Mobile: 912-978-0482"
-                        engine.say(text)
-                        # play the speech
-                        engine.runAndWait()
+                    if random.randint(1, 5) == 1:
+                        say("Gender: female, Race: White, Birthday: 1/8/1989 (33 years old), Street: 3344 Lakeland Park Drive City, State, Zip: Roswell, Georgia(GA), 30075 Telephone: 770-643-6809 Mobile: 912-978-0482")
 
                     else:
 
@@ -239,19 +230,10 @@ while True:
 
                 elif answer == 2:
 
-                    # convert this text to speech
-                    text = "No"
-                    engine.say(text)
-                    # play the speech
-                    engine.runAndWait()
+                    say("No")
 
                 elif answer == 3:
-                    # convert this text to speech
-                    text = "Hohoho"
-                    engine.say(text)
-                    # play the speech
-                    engine.runAndWait()
-
+                    say("hohoho")
     # talk
 
     elif x == 3:
@@ -286,11 +268,7 @@ while True:
                 print(ex)
 
             if 'face' in words:
-                # convert this text to speech
-                text = "Wumpaflump"
-                engine.say(text)
-                # play the speech
-                engine.runAndWait()
+                say("Wumpaflump")
 
             elif 'stomach' in words:
                 print('BUM POO')
@@ -365,7 +343,7 @@ while True:
                     print('GULPASCULP')
                     print('GULPASCULP')
                     print('GULPASCULP')
-                elif gulpsculp == 5:
+                else:
                     print('GULPASCULP')
                     print('GULPASCULP')
                     print('GULPASCULP')
@@ -376,8 +354,7 @@ while True:
                     print('*throws can* CHACHAHCAHHLCLLLGGNG')
 
             elif 'slap' in words:
-                slap_noise = random.randint(0, 1)
-                if slap_noise == 0:
+                if random.randint(0, 1) == 0:
                     print('PISH')
                 else:
                     print('PISH ULGH')
@@ -394,7 +371,7 @@ while True:
                     print('BLUGH')
                 elif burp_noise == 4:
                     print('EEEEEEEEEEEEEEEEEEEEEEEEEUUUUUUUUUUUUUUUUGGHHHGH')
-                elif burp_noise == 5:
+                else:
                     print('BLOUUUUUUUUUUUUUAAGAAGHGA')
 
 
@@ -433,9 +410,9 @@ while True:
                 # convert this text to speech
                 text = words
                 engine.setProperty("rate", 75)
-                engine.say(text)
-                # play the speech
-                engine.runAndWait()
+                say(words)
+
+
 
     # lab
 
@@ -448,55 +425,21 @@ while True:
             y = 3
 
         print('yellow, green, cyan, pink, blue')
+        
+
 
         pot1 = input('... ')
+        list_of_colors = ['yellow', 'green', 'cyan', 'pink', 'blue']
+        for i in list_of_colors:
+            if pot1 == i:
+                    z -= 1 + i
+                    print('pshhlllllle')
+                    time.sleep(0.5)
+                    print(pot1, 'potion')
+                    break
 
-        if pot1 == 'yellow':
-            z -= 1
 
-            print('pshhlllllle')
-
-            time.sleep(0.5)
-
-            print(pot1, 'potion')
-
-        elif pot1 == 'green':
-            z -= 2
-
-            print('pshhlllllle')
-
-            time.sleep(0.5)
-
-            print(pot1, 'potion')
-
-        elif pot1 == 'cyan':
-            z -= 3
-
-            print('pshhlllllle')
-
-            time.sleep(0.5)
-
-            print(pot1, 'potion')
-
-        elif pot1 == 'pink':
-            z -= 4
-
-            print('pshhlllllle')
-
-            time.sleep(0.5)
-
-            print(pot1, 'potion')
-
-        elif pot1 == 'blue':
-            z -= 5
-
-            print('pshhlllllle')
-
-            time.sleep(0.5)
-
-            print(pot1, 'potion')
-
-        elif pot1 == 'phone':
+        if pot1 == 'phone':
             y = 3
             x = 2
 
@@ -518,52 +461,18 @@ while True:
 
             pot2 = input('... ')
 
-            if pot2 == 'yellow':
-                z -= 10
+            list_of_potions = ['yellow', 'green', 'cyan', 'pink', 'blue']
+            for i in list_of_potions:
+                if pot2 == i:
+                    z -= 10 + i * 10
+                    print('pshhlllllle')
+                    time.sleep(0.5)
+                    print(pot2, 'potion')
+                    break
+            
 
-                print('pshhlllllle')
 
-                time.sleep(0.5)
-
-                print(pot2, 'potion')
-
-            elif pot2 == 'green':
-                z -= 20
-
-                print('pshhlllllle')
-
-                time.sleep(0.5)
-
-                print(pot2, 'potion')
-
-            elif pot2 == 'cyan':
-                z -= 30
-
-                print('pshhlllllle')
-
-                time.sleep(0.5)
-
-                print(pot2, 'potion')
-
-            elif pot2 == 'pink':
-                z -= 40
-
-                print('pshhlllllle')
-
-                time.sleep(0.5)
-
-                print(pot2, 'potion')
-
-            elif pot2 == 'blue':
-                z -= 50
-
-                print('pshhlllllle')
-
-                time.sleep(0.5)
-
-                print(pot2, 'potion')
-
-            elif pot2 == 'phone':
+            if pot2 == 'phone':
                 y = 3
                 x = 2
 
